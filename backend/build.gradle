@@ -22,9 +22,6 @@ repositories {
 
 
 dependencies {
-
-    implementation project(':backend')
-
     implementation group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: jerseyVersion
     implementation group: 'org.glassfish.jersey.core', name: 'jersey-server', version: jerseyVersion
     implementation group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: jerseyVersion
@@ -56,11 +53,19 @@ tasks.withType(JavaCompile) {
 }
 
 
+ext.moduleName = 'org.digitalsprouts.example.backend'
 compileJava {
+    inputs.property("moduleName", moduleName)
     doFirst {
         options.compilerArgs = [
                 '--module-path', classpath.asPath,
         ]
         classpath = files()
+    }
+}
+jar {
+    inputs.property("moduleName", moduleName)
+    manifest {
+        attributes('Automatic-Module-Name': moduleName)
     }
 }

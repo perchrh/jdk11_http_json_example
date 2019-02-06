@@ -1,6 +1,6 @@
 package org.digitalsprouts.example.http_client.resource;
 
-import org.digitalsprouts.example.http_client.json.CustomerOnboarding;
+import org.digitalsprouts.example.http_client.api.CustomerOnboarding;
 import org.digitalsprouts.example.http_client.service.CustomerOnboardingService;
 
 import javax.inject.Inject;

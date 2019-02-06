@@ -1,4 +1,4 @@
 rootProject.name = 'http-client-demo'
 include 'client'
-//include 'backend'
+include 'backend'
 

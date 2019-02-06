@@ -1,4 +1,4 @@
-package org.digitalsprouts.example.http_client.json;
+package org.digitalsprouts.example.http_client.api;
 
 public class ProductSpecification {
 

@@ -1,6 +1,6 @@
 package org.digitalsprouts.example.http_client;
 
-import org.digitalsprouts.example.http_client.json.CustomerOnboarding;
+import org.digitalsprouts.example.http_client.api.CustomerOnboarding;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,7 +13,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,9 +27,12 @@ public class CustomerOnboardingResourceTest {
 
     private static ObjectMapper objectMapper;
 
+    // TODO test using mocked CustomerOnboardingService
 
     @BeforeAll
     static void setUp() throws Exception {
+        System.setProperty("example.client.test.mode", "true");
+
         testServer = new TestServer();
         testServer.start();
 

@@ -1,4 +1,4 @@
-module http.client.demo.main {
+module org.digitalsprouts.example.backend{
     requires java.net.http;
     requires jersey.server;
     requires java.ws.rs;
@@ -10,5 +10,6 @@ module http.client.demo.main {
     requires com.fasterxml.jackson.datatype.jsr310;
     requires jakarta.inject;
 
-    requires org.digitalsprouts.example.backend;
+    exports org.digitalsprouts.example.backend.service;
+    exports org.digitalsprouts.example.backend.api;
 }
