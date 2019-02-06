@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class CustomerService {
 
-    Random dummyCustomerNumberGenerator = new Random(1337);
+    private final Random dummyCustomerNumberGenerator = new Random(1337);
 
-    public Customer createCustomer(CustomerSpecification c) {
+    public Customer createCustomer(CustomerSpecification specification, String emailAddress, String phoneNumber) {
+        // TODO forward all the fields
         return new Customer(String.valueOf(dummyCustomerNumberGenerator.nextInt()));
     }
-
 
 }

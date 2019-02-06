@@ -11,11 +11,12 @@ public class AgreementService {
     private final static Random dummyAgreementNumberGenerator = new Random(0xdeadbeef);
 
     public Agreement createAgreement(Customer customer, AgreementOptions AgreementOptions) {
-        return new Agreement(customer.getCustomerId(), AgreementOptions, String.valueOf(dummyAgreementNumberGenerator.nextInt()));
+        return new Agreement(customer.getCustomerNumber(), AgreementOptions, String.valueOf(dummyAgreementNumberGenerator.nextInt()));
     }
 
-    public Agreement.AgreementStatus updateAgreementStatus(Agreement agreement, Agreement.AgreementStatus agreementStatus) {
-        return Agreement.AgreementStatus.DISPATCHED;
+    public Agreement updateAgreementStatus(Agreement agreement, Agreement.AgreementStatus agreementStatus) {
+       agreement.setAgreementStatus(agreementStatus);
+       return agreement;
     }
 
 }

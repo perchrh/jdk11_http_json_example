@@ -6,6 +6,7 @@ public class CustomerOnboardingResponse {
 
     private String agreementNumber;
     private AgreementStatus agreementStatus;
+    private String customerNumber;
 
     public String getAgreementNumber() {
         return agreementNumber;
@@ -21,5 +22,13 @@ public class CustomerOnboardingResponse {
 
     public void setAgreementStatus(AgreementStatus agreementStatus) {
         this.agreementStatus = agreementStatus;
+    }
+
+    public void setCustomerNumber(String customerNumber) {
+        this.customerNumber = customerNumber;
+    }
+
+    public String getCustomerNumber() {
+        return customerNumber;
     }
 }

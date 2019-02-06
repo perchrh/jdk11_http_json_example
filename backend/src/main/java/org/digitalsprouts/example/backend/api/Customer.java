@@ -2,13 +2,13 @@ package org.digitalsprouts.example.backend.api;
 
 public class Customer {
 
-    private final String customerId;
+    private final String customerNumber;
 
-    public Customer(String customerId) {
-        this.customerId = customerId;
+    public Customer(String customerNumber) {
+        this.customerNumber = customerNumber;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getCustomerNumber() {
+        return customerNumber;
     }
 }
