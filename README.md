@@ -13,6 +13,7 @@ Other classes of note are TestServer - an embedded Jetty server, and
 Application - the webapp. 
 
 Some uninteresting parts are glossed over. A TODO may be seen next to these parts. 
+Data objects are mapped from the API of the frontend-layer to the API of the backend. 
 
 To compile from the command line, use
 $  ./gradlew clean build 
