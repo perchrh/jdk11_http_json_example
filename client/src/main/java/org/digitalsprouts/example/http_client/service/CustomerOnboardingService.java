@@ -1,7 +1,8 @@
 package org.digitalsprouts.example.http_client.service;
 
-import org.digitalsprouts.example.http_client.api.CustomerOnboarding;
+import org.digitalsprouts.example.http_client.api.CustomerOnboardingRequest;
+import org.digitalsprouts.example.http_client.api.CustomerOnboardingResponse;
 
 public interface CustomerOnboardingService {
-    CustomerOnboarding onboardNewCustomer();
+    CustomerOnboardingResponse onboardNewCustomer(CustomerOnboardingRequest customerOnboardingRequest);
 }

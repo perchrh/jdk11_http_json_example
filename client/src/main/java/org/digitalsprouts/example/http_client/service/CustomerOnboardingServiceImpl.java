@@ -3,7 +3,8 @@ package org.digitalsprouts.example.http_client.service;
 import org.digitalsprouts.example.backend.service.AgreementService;
 import org.digitalsprouts.example.backend.service.CustomerService;
 import org.digitalsprouts.example.backend.service.LetterService;
-import org.digitalsprouts.example.http_client.api.CustomerOnboarding;
+import org.digitalsprouts.example.http_client.api.CustomerOnboardingRequest;
+import org.digitalsprouts.example.http_client.api.CustomerOnboardingResponse;
 
 public class CustomerOnboardingServiceImpl implements CustomerOnboardingService {
 
@@ -20,7 +21,7 @@ public class CustomerOnboardingServiceImpl implements CustomerOnboardingService 
     }
 
     @Override
-    public CustomerOnboarding onboardNewCustomer() {
+    public CustomerOnboardingResponse onboardNewCustomer(CustomerOnboardingRequest c) {
         return null;
     }
 }

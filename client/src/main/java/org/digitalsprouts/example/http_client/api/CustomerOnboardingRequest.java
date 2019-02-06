@@ -1,6 +1,6 @@
 package org.digitalsprouts.example.http_client.api;
 
-public class CustomerOnboarding {
+public class CustomerOnboardingRequest {
 
     private String nationalRegistrationId;
     private String phoneNumber;

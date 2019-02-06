@@ -1,10 +1,11 @@
 package org.digitalsprouts.example.http_client.resource;
 
-import org.digitalsprouts.example.http_client.api.CustomerOnboarding;
+import org.digitalsprouts.example.http_client.api.CustomerOnboardingRequest;
+import org.digitalsprouts.example.http_client.api.CustomerOnboardingResponse;
 import org.digitalsprouts.example.http_client.service.CustomerOnboardingService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -16,12 +17,12 @@ public class CustomerOnboardingResource {
     @Inject
     private CustomerOnboardingService service;
 
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTomatoes() {
-        CustomerOnboarding current = service.onboardNewCustomer();
+    public Response onboardNewCustomer(final CustomerOnboardingRequest request) {
+        CustomerOnboardingResponse result = service.onboardNewCustomer(request);
 
-        return Response.ok(current).build();
+        return Response.ok(result).build();
     }
 
 }
