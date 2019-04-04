@@ -18,5 +18,5 @@ Data objects are mapped from the API of the frontend-layer to the API of the bac
 To compile from the command line, use
 $  ./gradlew clean build 
 
-Note that IntelliJ doesn't automatically set the project SDK to JDK 11. 
+Note that IntelliJ < 2019.1 doesn't automatically set the project SDK to JDK 11.
 Make sure to do that in module settings - project.
