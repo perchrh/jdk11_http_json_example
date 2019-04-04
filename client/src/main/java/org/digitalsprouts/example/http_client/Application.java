@@ -31,6 +31,14 @@ public class Application extends ResourceConfig {
         register(getBinder());
     }
 
+    public static ObjectMapper createObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new Jdk8Module());
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        return objectMapper;
+    }
+
     protected AbstractBinder getBinder() {
         AgreementService agreementService = new AgreementService();
         CustomerService customerService = new CustomerService();
@@ -50,16 +58,7 @@ public class Application extends ResourceConfig {
         };
     }
 
-    public static ObjectMapper createObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new Jdk8Module());
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        return objectMapper;
-    }
-
     private ObjectMapper setupObjectMapper(ObjectMapper objectMapper) {
-
         register(new ContextResolver<ObjectMapper>() {
             @Override
             public ObjectMapper getContext(final Class<?> type) {

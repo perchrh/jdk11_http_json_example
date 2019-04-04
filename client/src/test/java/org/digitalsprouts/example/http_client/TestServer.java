@@ -11,6 +11,12 @@ public class TestServer {
     private Server server;
     private URI baseUri;
 
+    public static void main(String[] args) throws Exception {
+        TestServer server = new TestServer();
+        server.start();
+        System.out.println("Server running at " + server.getBaseUri());
+    }
+
     public void start() throws Exception {
         server = new Server();
         ServerConnector connector = new ServerConnector(server);
@@ -40,12 +46,6 @@ public class TestServer {
 
     public URI getBaseUri() {
         return baseUri;
-    }
-
-    public static void main(String[] args) throws Exception {
-        TestServer server = new TestServer();
-        server.start();
-        System.out.println("Server running at " + server.getBaseUri());
     }
 
 }

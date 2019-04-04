@@ -15,8 +15,8 @@ public class AgreementService {
     }
 
     public Agreement updateAgreementStatus(Agreement agreement, Agreement.AgreementStatus agreementStatus) {
-       agreement.setAgreementStatus(agreementStatus);
-       return agreement;
+        agreement.setAgreementStatus(agreementStatus);
+        return agreement;
     }
 
 }

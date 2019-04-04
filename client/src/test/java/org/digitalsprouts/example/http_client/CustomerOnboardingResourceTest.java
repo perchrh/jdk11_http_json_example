@@ -31,6 +31,11 @@ public class CustomerOnboardingResourceTest {
         objectMapper = Application.createObjectMapper();
     }
 
+    @AfterAll
+    static void tearDown() {
+        testServer.stop();
+    }
+
     @Test
     void onboarding_serviceSuccess_canBeDeserialized() throws IOException, InterruptedException {
         HttpResponse<InputStream> rawResponse = apiClient.makePostRequest("customerOnboarding", createDummyRequest());
@@ -40,10 +45,5 @@ public class CustomerOnboardingResourceTest {
         assertThat(response).isNotNull();
         assertThat(response.getAgreementNumber()).isNotNull();
         assertThat(response.getAgreementStatus()).isEqualTo(Agreement.AgreementStatus.DISPATCHED);
-    }
-
-    @AfterAll
-    static void tearDown() {
-        testServer.stop();
     }
 }

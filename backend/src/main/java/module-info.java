@@ -1,4 +1,4 @@
-module org.digitalsprouts.example.backend{
+module org.digitalsprouts.example.backend {
     requires java.net.http;
     requires java.ws.rs;
     requires java.xml.bind;

@@ -12,7 +12,8 @@ import org.digitalsprouts.example.http_client.api.CustomerOnboardingResponse;
 import org.digitalsprouts.example.http_client.api.ProductSpecification;
 import org.digitalsprouts.example.http_client.resource.MockedPersonLookupService;
 
-import static org.digitalsprouts.example.backend.api.Agreement.AgreementStatus.*;
+import static org.digitalsprouts.example.backend.api.Agreement.AgreementStatus.AWAITING_DISPATCH;
+import static org.digitalsprouts.example.backend.api.Agreement.AgreementStatus.DISPATCHED;
 
 public class CustomerOnboardingServiceImpl implements CustomerOnboardingService {
 
@@ -53,7 +54,7 @@ public class CustomerOnboardingServiceImpl implements CustomerOnboardingService 
     }
 
     private Agreement.AgreementStatus asAgreementStatus(LetterService.DeliveryStatus status) {
-        return status.equals(LetterService.DeliveryStatus.DIGITAL_DELIVERY_QUEUED) ? DISPATCHED: AWAITING_DISPATCH;
+        return status.equals(LetterService.DeliveryStatus.DIGITAL_DELIVERY_QUEUED) ? DISPATCHED : AWAITING_DISPATCH;
     }
 
     private AgreementOptions asAgreementOptions(ProductSpecification productSpecification) {

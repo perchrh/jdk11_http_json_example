@@ -24,11 +24,11 @@ public class CustomerOnboardingResponse {
         this.agreementStatus = agreementStatus;
     }
 
-    public void setCustomerNumber(String customerNumber) {
-        this.customerNumber = customerNumber;
-    }
-
     public String getCustomerNumber() {
         return customerNumber;
+    }
+
+    public void setCustomerNumber(String customerNumber) {
+        this.customerNumber = customerNumber;
     }
 }
