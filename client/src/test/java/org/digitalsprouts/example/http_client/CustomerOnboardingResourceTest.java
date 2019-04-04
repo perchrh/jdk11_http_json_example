@@ -2,8 +2,6 @@ package org.digitalsprouts.example.http_client;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
 import org.digitalsprouts.example.backend.api.Agreement;
 import org.digitalsprouts.example.http_client.api.CustomerOnboardingResponse;
 import org.junit.jupiter.api.AfterAll;
@@ -21,8 +19,8 @@ public class CustomerOnboardingResourceTest {
 
     private static TestServer testServer;
     private static ApiClient apiClient;
-    private static ObjectReader objectReader;
     private static JsonFactory jsonFactory;
+    private static UncheckedObjectMapper objectMapper;
 
     @BeforeAll
     static void setUp() throws Exception {
@@ -32,8 +30,7 @@ public class CustomerOnboardingResourceTest {
         testServer.start();
 
         apiClient = new ApiClient(testServer.getBaseUri());
-        ObjectMapper objectMapper = Application.createObjectMapper();
-        objectReader = objectMapper.reader();
+        objectMapper = Application.createObjectMapper();
         jsonFactory = objectMapper.getFactory();
     }
 
@@ -47,10 +44,23 @@ public class CustomerOnboardingResourceTest {
         HttpResponse<InputStream> rawResponse = apiClient.makePostRequest("customerOnboarding", createDummyRequest());
 
         JsonParser jsonParser = jsonFactory.createParser(rawResponse.body());
-        CustomerOnboardingResponse response = objectReader.readValue(jsonParser, CustomerOnboardingResponse.class);
+        CustomerOnboardingResponse response = objectMapper.reader().readValue(jsonParser, CustomerOnboardingResponse.class);
 
+        verifyResponse(response);
+    }
+
+    @Test
+    void onboarding_serviceSuccess_canBeDeserializedAsync() throws IOException {
+        apiClient.makeAsyncPostRequest("customerOnboarding", createDummyRequest())
+                .thenApply(HttpResponse::body)
+                .thenApply(body -> objectMapper.readValue(body, CustomerOnboardingResponse.class))
+                .whenComplete((response, throwable) -> verifyResponse(response));
+    }
+
+    private void verifyResponse(CustomerOnboardingResponse response) {
         assertThat(response).isNotNull();
         assertThat(response.getAgreementNumber()).isNotNull();
         assertThat(response.getAgreementStatus()).isEqualTo(Agreement.AgreementStatus.DISPATCHED);
     }
+
 }

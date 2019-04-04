@@ -16,6 +16,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 
 public class ApiClient {
 
@@ -33,16 +34,25 @@ public class ApiClient {
         this.baseUri = baseUri;
     }
 
-    public HttpResponse<InputStream> makePostRequest(String resourcePath, Object data) throws IOException, InterruptedException {
-        HttpRequest.Builder builder = HttpRequest.newBuilder();
-        HttpRequest httpRequest = builder
+    private HttpRequest createPostRequest(String resourcePath, HttpRequest.BodyPublisher bodyPublisher) {
+        return HttpRequest.newBuilder()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.ACCEPT_CHARSET, StandardCharsets.UTF_8.name())
                 .uri(baseUri.resolve(resourcePath))
-                .POST(createStreamingBody(data))
+                .POST(bodyPublisher)
                 .build();
+    }
+
+    public HttpResponse<InputStream> makePostRequest(String resourcePath, Object data) throws IOException, InterruptedException {
+        HttpRequest httpRequest = createPostRequest(resourcePath, createStreamingBody(data));
 
         return client.send(httpRequest, HttpResponse.BodyHandlers.ofInputStream());
+    }
+
+    public CompletableFuture<HttpResponse<InputStream>> makeAsyncPostRequest(String resourcePath, Object data) throws IOException {
+        HttpRequest httpRequest = createPostRequest(resourcePath, createBody(data));
+
+        return client.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofInputStream());
     }
 
     /*

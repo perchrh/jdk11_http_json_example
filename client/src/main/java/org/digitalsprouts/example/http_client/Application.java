@@ -31,8 +31,8 @@ public class Application extends ResourceConfig {
         register(getBinder());
     }
 
-    public static ObjectMapper createObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public static UncheckedObjectMapper createObjectMapper() {
+        UncheckedObjectMapper objectMapper = new UncheckedObjectMapper();
         objectMapper.registerModule(new Jdk8Module());
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
