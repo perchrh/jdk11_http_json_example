@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +21,7 @@ import static java.net.http.HttpClient.Version.*;
 
 public class ApiClient {
 
-    private final java.net.http.HttpClient client = java.net.http.HttpClient.newBuilder()
+    private final HttpClient client = HttpClient.newBuilder()
             .version(HTTP_2)
             .connectTimeout(Duration.ofSeconds(2))
             .build();
