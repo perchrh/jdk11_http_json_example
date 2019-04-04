@@ -1,6 +1,9 @@
 package org.digitalsprouts.example.http_client;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 import org.digitalsprouts.example.backend.api.Agreement;
 import org.digitalsprouts.example.http_client.api.CustomerOnboardingResponse;
 import org.junit.jupiter.api.AfterAll;
@@ -18,7 +21,8 @@ public class CustomerOnboardingResourceTest {
 
     private static TestServer testServer;
     private static ApiClient apiClient;
-    private static ObjectMapper objectMapper;
+    private static ObjectReader objectReader;
+    private static JsonFactory jsonFactory;
 
     @BeforeAll
     static void setUp() throws Exception {
@@ -28,7 +32,9 @@ public class CustomerOnboardingResourceTest {
         testServer.start();
 
         apiClient = new ApiClient(testServer.getBaseUri());
-        objectMapper = Application.createObjectMapper();
+        ObjectMapper objectMapper = Application.createObjectMapper();
+        objectReader = objectMapper.reader();
+        jsonFactory = objectMapper.getFactory();
     }
 
     @AfterAll
@@ -40,7 +46,8 @@ public class CustomerOnboardingResourceTest {
     void onboarding_serviceSuccess_canBeDeserialized() throws IOException, InterruptedException {
         HttpResponse<InputStream> rawResponse = apiClient.makePostRequest("customerOnboarding", createDummyRequest());
 
-        CustomerOnboardingResponse response = objectMapper.readValue(rawResponse.body(), CustomerOnboardingResponse.class);
+        JsonParser jsonParser = jsonFactory.createParser(rawResponse.body());
+        CustomerOnboardingResponse response = objectReader.readValue(jsonParser, CustomerOnboardingResponse.class);
 
         assertThat(response).isNotNull();
         assertThat(response.getAgreementNumber()).isNotNull();
