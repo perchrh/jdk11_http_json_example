@@ -27,7 +27,7 @@ public class ApiClient {
             .build();
 
     private final ObjectMapper objectMapper = Application.createObjectMapper();
-    private final JsonFactory jsonFactory = new JsonFactory();
+    private final JsonFactory jsonFactory = objectMapper.getFactory();
 
     private final URI baseUri;
 
