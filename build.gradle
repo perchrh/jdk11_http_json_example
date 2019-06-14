@@ -1,6 +1,7 @@
 ext {
-    jettyVersion = "9.4.15.v20190215"
+    jettyVersion = "9.4.19.v20190610"
     jerseyVersion = "2.28"
-    jacksonVersion = '2.9.8'
-    junitVersion = '5.4.1'
+    jacksonVersion = '2.9.9'
+    junitVersion = '5.4.2'
+    assertJVersion = '3.12.2'
 }
